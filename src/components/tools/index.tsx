@@ -3,7 +3,7 @@ import React from 'react';
 import {Container} from './styles';
 
 
-export default function MenuBar(){
+export default function ToolsBar(){
 
     return <Container>
         menu bar

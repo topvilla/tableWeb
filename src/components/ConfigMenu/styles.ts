@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 
-    color:#fff;
     height:100%;
-    width:70%;
-    border: solid 1px black;
+    width:300px;
+    background-color:#fff;
 `;
+
+export const SizeGraphicOptions = styled.div``;

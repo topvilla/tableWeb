@@ -1,8 +1,8 @@
-import {canvasReducer} from './canvas';
+import {boardReducer} from './board';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-  canvas: canvasReducer,
+  board: boardReducer,
   
 })
 
