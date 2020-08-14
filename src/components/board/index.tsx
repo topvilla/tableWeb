@@ -16,7 +16,7 @@ export default function Board(){
     const graphics:Array<Graphic> = state.graphics;
 
     return <Container>
-            <ToolsBar/>
+            {/* <ToolsBar/> */}
                 <Layouts>
                     {
                        graphics.map((graphic:Graphic)=>{

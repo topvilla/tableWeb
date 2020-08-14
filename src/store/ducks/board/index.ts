@@ -1,14 +1,14 @@
-import {BoardState,BoardActions,BoardTypes} from './types';
+import {BoardState,BoardActions,BoardTypes, Graphic} from './types';
 import { v4 as uuidv4 } from 'uuid';
 
 const INITIAL_STATE:BoardState = {
-    graphicActivi:null,
+    graphicActive:null,
     graphics:[
         {
             id:uuidv4().toString(),
             heigth:100,
             width:100,
-            visible:false,
+            visible:true,
             selected:false,
             type:"container",
             graphisc:[],
@@ -43,33 +43,47 @@ export function boardReducer(
     switch (action.type) {
 
         case BoardTypes.UPDATE_GRAPHIC_SELECTED :
-            
-            return {
-                ...state,
-                graphicSelected:action.graphic,
-                graphics:[...state.graphics.map((element)=>{
-                    if(element.id === action.graphic.id) return action.graphic
-                    else return element;
-                })]
-            }
+            return updateGraphicSelected(action.graphic,state);
         case BoardTypes.SELECT_GRAPHIC :
-            
-            return {
-                ...state,
-                graphicActivi:action.graphic,
-                graphics:state.graphics.map((element)=>{
-                    if(element.id === action.graphic.id)element.selected = true;
-                    else element.selected = false;
-                    return element;
-                })
-                
-            }
+            return selectGraphic(action.graphic,state);
         case BoardTypes.ADD_GRAPHIC :
-            return {
-                ...state,
-                graphics:[...state.graphics,action.graphic]
-            }
+            return addGraphicInGraphics(action.graphic,state);
         default:
             return {...state}
+    }
+}
+
+function updateGraphicSelected(graphic:Graphic,state:BoardState){
+    return {
+        ...state,
+        graphicActive:graphic,
+        graphics:[...updateGraphics(graphic,state)]
+    }
+}
+function updateGraphics(graphic:Graphic,state:BoardState){
+   return state.graphics.map((element)=>{
+        if(element.id === graphic.id) return graphic
+        else return element;
+    })
+}
+function selectGraphic(graphic:Graphic,state:BoardState){
+    return {
+        ...state,
+        graphicActive:graphic,
+        graphics:selectGraphicInGraphics(graphic,state)
+        
+    }
+}
+function selectGraphicInGraphics(graphic:Graphic,state:BoardState){
+    return state.graphics.map((element)=>{
+        if(element.id === graphic.id)element.selected = true;
+        else element.selected = false;
+        return element;
+    })
+}
+function addGraphicInGraphics(graphic:Graphic,state:BoardState){
+    return {
+        ...state,
+        graphics:[...state.graphics,graphic]
     }
 }

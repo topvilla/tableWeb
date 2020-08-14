@@ -44,6 +44,6 @@ export type Graphic = IGraphic | IContainer;
 
 export interface BoardState {
     readonly graphics:Array<Graphic>,
-    readonly graphicActivi:Graphic | null,
+    readonly graphicActive:Graphic | null,
 
 }

@@ -18,7 +18,15 @@ const BoardContainer:React.FC<Props> = ({container})=>{
                 dispatch(selectGraphicAction(container));
             }}
         >
-        container
+        <div
+            style = {{
+                backgroundColor:"red",
+                width:"100px",
+                height:"100px"
+            }}
+        >
+            one
+        </div>
     </Container>
 }
 export default BoardContainer;

@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const Layouts = styled.div`
 
-    width:70%;
+    width:80%;
     height:100%;
     padding:10px;
     display:flex;
