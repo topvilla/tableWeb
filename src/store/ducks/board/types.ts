@@ -1,13 +1,13 @@
 
-
+//types
 export enum BoardTypes{
     ADD_GRAPHIC = "board/ADD_GRAPHIC",
     SELECT_GRAPHIC = "board/SELECT_GRAPHIC ",
     UPDATE_GRAPHIC_SELECTED = "board/UPDATE_GRAPHIC_SELECTED ",
-
-
 }
 
+
+//actions
 interface addGraphicAction {
     type:string,
     graphic:IGraphic | IContainer
@@ -17,6 +17,8 @@ interface selectGraphicAction {
     type:string,
     graphic:IGraphic | IContainer
 }
+
+
 interface updateGraphicSelected{
     type:string,
     graphic:IGraphic | IContainer
@@ -24,7 +26,7 @@ interface updateGraphicSelected{
 
 export type BoardActions = addGraphicAction | selectGraphicAction | updateGraphicSelected;
 
-
+// states
 export interface IGraphic {
     id:string,
     width:number,
@@ -34,13 +36,14 @@ export interface IGraphic {
     type:string;
 }
 
-
 export interface IContainer extends IGraphic{
     graphisc:Array<IGraphic | IContainer>
 }
 
+export type Graphic = IGraphic | IContainer;
+
 export interface BoardState {
-    readonly graphics:Array<IContainer | IGraphic>,
-    readonly graphicActivi:IContainer | IGraphic | null,
+    readonly graphics:Array<Graphic>,
+    readonly graphicActivi:Graphic | null,
 
 }

@@ -15,5 +15,6 @@ export const Layouts = styled.div`
     display:flex;
     flex-flow:column;
     justify-content:space-evenly;
+    
 
 `;

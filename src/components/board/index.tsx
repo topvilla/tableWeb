@@ -6,24 +6,27 @@ import ToolsBar from '../tools';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/ducks/rootReducer';
 import BoardContainer from '../container';
-import {IContainer} from '../../store/ducks/board/types';
+import { IContainer, Graphic} from '../../store/ducks/board/types';
 
 
 
 export default function Board(){
 
     const state = useSelector((state:RootState)=>state.board);
+    const graphics:Array<Graphic> = state.graphics;
 
     return <Container>
             <ToolsBar/>
                 <Layouts>
                     {
-                        state.graphics.map((container)=>{
+                       graphics.map((graphic:Graphic)=>{
+                           if(graphic.visible){
                             return <BoardContainer 
-                                    key = {container.id} 
-                                        container = {(container as IContainer)}
-                                    />
-                        })
+                            key = {graphic.id}
+                            container = {graphic}
+                            /> 
+                           }
+                       })
                     }
                 </Layouts>
            <ConfigMenu/>

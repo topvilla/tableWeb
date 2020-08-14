@@ -8,7 +8,7 @@ const INITIAL_STATE:BoardState = {
             id:uuidv4().toString(),
             heigth:100,
             width:100,
-            visible:true,
+            visible:false,
             selected:false,
             type:"container",
             graphisc:[],
