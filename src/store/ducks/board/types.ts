@@ -33,6 +33,8 @@ export interface IGraphic {
     heigth:number;
     visible:boolean,
     selected:boolean;
+    justifyContent:string,
+    alignItems:string;
     type:string;
 }
 

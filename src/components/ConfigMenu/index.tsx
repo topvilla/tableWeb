@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import {Container , SizeGraphicOptions} from './styles';
+import {Container } from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/ducks/rootReducer';
 import { updateGraphicSelected } from '../../store/ducks/board/actions';
 import { Graphic } from '../../store/ducks/board/types';
 
-import HandlerSizeElement from './../handlerSizeElement/inde';
+import HandlerSizeElement from '../handlerSizeElement';
+import HandlerGraphicsPosition from './../handlerGraphicsPosition/index';
+import HandlerLayer from '../handlerLayer';
+
 
 
 const ConfigMenu = ()=>{
@@ -23,9 +26,18 @@ const ConfigMenu = ()=>{
 
     return <Container>
         
+    
+        <HandlerGraphicsPosition
+          graphicActive = {graphicActive} 
+          updateStateGraphic = {updateStateActiveGraphic}
+        />
         <HandlerSizeElement 
             graphicActive = {graphicActive} 
             updateStateGraphic = {updateStateActiveGraphic}
+        />
+        <HandlerLayer
+             graphicActive = {graphicActive} 
+             updateStateGraphic = {updateStateActiveGraphic}
         />
 
     </Container>

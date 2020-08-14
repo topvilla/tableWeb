@@ -11,6 +11,8 @@ const INITIAL_STATE:BoardState = {
             visible:true,
             selected:false,
             type:"container",
+            justifyContent:"flex-start",
+            alignItems:"flex-start",
             graphisc:[],
         },
         {
@@ -20,6 +22,8 @@ const INITIAL_STATE:BoardState = {
             visible:true,
             selected:false,
             type:"container",
+            justifyContent:"flex-start",
+            alignItems:"flex-start",
             graphisc:[],
         },
         {
@@ -29,6 +33,8 @@ const INITIAL_STATE:BoardState = {
             visible:true,
             selected:false,
             type:"container",
+            justifyContent:"flex-start",
+            alignItems:"flex-start",
             graphisc:[],
         },
 
