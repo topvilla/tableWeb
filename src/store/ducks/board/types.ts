@@ -6,7 +6,9 @@ export enum BoardTypes{
     UPDATE_GRAPHIC_SELECTED = "board/UPDATE_GRAPHIC_SELECTED ",
     UPDATE_GRAPHIC = "board/UPDATE_GRAPHIC ",
     HIDDEN_GRAPHIC = "board/HIDDEN_GRAPHIC ",
-    DEACTIVATE_GRAPHIC = "board/DEACTIVATE_GRAPHIC"
+    DEACTIVATE_GRAPHIC = "board/DEACTIVATE_GRAPHIC",
+    UPDATE_BOARD = "board/UPDATE_BOARD",
+
 }
 
 
@@ -40,9 +42,14 @@ interface deactivateGraphicAction{
     graphic?:IGraphic | IContainer 
 }
 
+export interface updateBoardStateActionType {
+    type:string,
+    board:IBoard,
+    graphic?:IGraphic | IContainer 
+}
 
 export type BoardActions = addGraphicAction | selectGraphicAction 
-| updateGraphicSelected | hiddenGraphic | updateGraphic | deactivateGraphicAction;
+| updateGraphicSelected | hiddenGraphic | updateGraphic | deactivateGraphicAction | updateBoardStateActionType;
 
 // states
 export interface IGraphic {

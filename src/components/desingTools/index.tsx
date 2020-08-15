@@ -3,7 +3,7 @@ import React from 'react';
 import {Container ,Title} from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/ducks/rootReducer';
-import { updateGraphicSelectedAction} from '../../store/ducks/board/actions';
+import { updateGraphicSelectedAction, updateBoardStateAction} from '../../store/ducks/board/actions';
 import { Graphic, IBoard } from '../../store/ducks/board/types';
 import FillTools from './components/fill/index';
 import PositionTools from './components/position/index';
@@ -18,7 +18,8 @@ export interface IDesingTools{
 }
 
 export interface IDesingToolsWithBoard extends IDesingTools{
-    board:IBoard
+    board:IBoard,
+    updateBoardState:(board:IBoard)=>void;
 }
 
 const DesingTools = ()=>{
@@ -30,6 +31,9 @@ const DesingTools = ()=>{
 
     function updateStateActiveGraphic(graphic:Graphic){
         dispatch(updateGraphicSelectedAction(graphic));
+    }
+    function updateStateBoardAction(board:IBoard){
+        dispatch(updateBoardStateAction(board));
     }
 
     function renderToolsForGraphicActive(){
@@ -63,6 +67,7 @@ const DesingTools = ()=>{
        <FillTools 
                 graphicActive = {graphicActive} 
                 updateStateGraphic = {updateStateActiveGraphic}
+                updateBoardState = {updateStateBoardAction}
                 board = {board}
         />
     </Container>

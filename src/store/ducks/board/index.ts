@@ -1,4 +1,4 @@
-import {BoardState,BoardActions,BoardTypes, Graphic} from './types';
+import { BoardState, BoardActions, BoardTypes, Graphic, IBoard ,updateBoardStateActionType } from './types';
 import { v4 as uuidv4 } from 'uuid';
 
 const INITIAL_STATE:BoardState = {
@@ -10,8 +10,8 @@ const INITIAL_STATE:BoardState = {
     graphics:[
         {
             id:uuidv4().toString(),
-            heigth:100,
             name:'Cabeçalho',
+            heigth:700,
             width:100,
             visible:true,
             selected:false,
@@ -19,35 +19,22 @@ const INITIAL_STATE:BoardState = {
             justifyContent:"flex-start",
             alignItems:"flex-start",
             backGroundColor:"transparent",
-            graphisc:[],
+            graphisc:[
+                {
+                    id:uuidv4().toString(),
+                    name:'Corpo',
+                    heigth:500,
+                    width:100,
+                    visible:true,
+                    selected:false,
+                    type:"container",
+                    justifyContent:"flex-start",
+                    alignItems:"flex-start",
+                    backGroundColor:"transparent",
+                    graphisc:[],
+                },
+            ],
         },
-        {
-            id:uuidv4().toString(),
-            name:'Corpo',
-            heigth:500,
-            width:100,
-            visible:true,
-            selected:false,
-            type:"container",
-            justifyContent:"flex-start",
-            alignItems:"flex-start",
-            backGroundColor:"transparent",
-            graphisc:[],
-        },
-        {
-            id:uuidv4().toString(),
-            name:'Rodapé',
-            heigth:100,
-            width:100,
-            visible:true,
-            selected:false,
-            type:"container",
-            justifyContent:"flex-start",
-            alignItems:"flex-start",
-            backGroundColor:"none",
-            graphisc:[],
-        },
-
     ]
 }
 
@@ -69,6 +56,9 @@ export function boardReducer(
             return hiddenGraphic(graphic!,state);
         case BoardTypes.DEACTIVATE_GRAPHIC :
             return desactiveGraphicSelectd(state);
+        case BoardTypes.UPDATE_BOARD :
+            const {board} = (action as updateBoardStateActionType);
+            return updateBoardState(board,state);
         default:
             return {...state}
     }
@@ -143,3 +133,12 @@ function deselectsGraphics(state:BoardState){
     })
 }
 
+
+function updateBoardState(board:IBoard,state:BoardState){
+    return {
+        ...state,
+        board:{
+            ...board
+        }
+    }
+}

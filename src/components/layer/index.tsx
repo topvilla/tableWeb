@@ -3,6 +3,7 @@ import React from 'react';
 
 import {Container} from './styles';
 import { Graphic } from '../../store/ducks/board/types';
+import HiddenButton from '../hiddenButton';
 
 
 interface Props {
@@ -31,9 +32,7 @@ const Layer:React.FC<Props> = ({graphic,index,hiddenGraphic,selectGraphic})=>{
         {
             renderLayeName()
         }
-        <button onClick = {()=>hiddenLayer()}>
-            {graphic.visible ? 'Esconder':'visualizar'}
-        </button>
+        <HiddenButton hidden = {hiddenLayer} graphicActive = {graphic}/>
     </Container>
 }
 export default Layer;

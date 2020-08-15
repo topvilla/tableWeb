@@ -23,33 +23,7 @@ const BoardContainer:React.FC<Props> = ({container})=>{
                 event.stopPropagation();
             }}
         >
-        <div
-            style = {{
-                backgroundColor:"gray",
-                width:"100px",
-                height:"50px"
-            }}
-        >
-            one
-        </div>
-        <div
-            style = {{
-                backgroundColor:"gray",
-                width:"100px",
-                height:"50px"
-            }}
-        >
-            one
-        </div>
-        <div
-            style = {{
-                backgroundColor:"gray",
-                width:"100px",
-                height:"50px"
-            }}
-        >
-            one
-        </div>
+      
     </Container>
 }
 export default BoardContainer;

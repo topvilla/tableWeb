@@ -1,5 +1,5 @@
 
-import {BoardTypes, IGraphic,IContainer} from './types';
+import { BoardTypes, IGraphic, IContainer, IBoard } from './types';
 
 
 export const addGraphicAction = (graphic:IGraphic | IContainer)=>{
@@ -41,5 +41,13 @@ export const deactivateGraphicAction =()=>{
     return {
         type:BoardTypes.DEACTIVATE_GRAPHIC,
         graphic:null
+    }
+}
+
+export const updateBoardStateAction =(board:IBoard)=>{
+    return {
+        type:BoardTypes.UPDATE_BOARD,
+        graphic:null,
+        board
     }
 }

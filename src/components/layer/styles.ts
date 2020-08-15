@@ -6,5 +6,15 @@ interface Props{
 }
 
 export const Container = styled.li<Props>`
-    background-color:${props=>props.selected?'#E7ECFF':'transparent'}
+
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding:5px;
+    border-bottom:solid 1px lightgray;
+    background-color:${props=>props.selected?'#E7ECFF':'transparent'};
+    font-size:0.6rem;
+    :hover{
+        border:solid 1px #5C9DFF;
+    }
 `;

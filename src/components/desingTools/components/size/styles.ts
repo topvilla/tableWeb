@@ -36,5 +36,6 @@ export const Input = styled.input`
     border:none;
     -moz-appearance: textfield;
     appearance: textfield;
+    font-size:0.6rem;
 
 `;

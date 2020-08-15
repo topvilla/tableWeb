@@ -5,6 +5,5 @@ import {Container} from './styles';
 export default function header(){
 
     return <Container>
-        header
     </Container>
 }

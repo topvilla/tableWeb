@@ -8,6 +8,7 @@ export const Button = styled.button`
     border:none;
     background-color:inherit;
     border-radius:5px;
+    color:dimgray;
     :hover{
         background-color:#E5E5E5;
     }
