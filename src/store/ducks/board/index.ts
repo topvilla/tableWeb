@@ -2,6 +2,10 @@ import {BoardState,BoardActions,BoardTypes, Graphic} from './types';
 import { v4 as uuidv4 } from 'uuid';
 
 const INITIAL_STATE:BoardState = {
+    board:{
+        type:"board",
+        backGroundColor:"#E5E5E5"
+    },
     graphicActive:null,
     graphics:[
         {
@@ -51,19 +55,20 @@ export function boardReducer(
     state = INITIAL_STATE,
     action:BoardActions
 ){
-   
+    const {graphic} = action; 
     switch (action.type) {
-
         case BoardTypes.UPDATE_GRAPHIC_SELECTED :
-            return updateGraphicSelected(action.graphic,state);
+            return updateGraphicSelected(graphic!,state);
         case BoardTypes.UPDATE_GRAPHIC :
-            return updateGraphic(action.graphic,state);
+            return updateGraphic(graphic!,state);
         case BoardTypes.SELECT_GRAPHIC :
-            return selectGraphic(action.graphic,state);
+            return selectGraphic(graphic!,state);
         case BoardTypes.ADD_GRAPHIC :
-            return addGraphicInGraphics(action.graphic,state);
+            return addGraphicInGraphics(graphic!,state);
         case BoardTypes.HIDDEN_GRAPHIC :
-            return hiddenGraphic(action.graphic,state);
+            return hiddenGraphic(graphic!,state);
+        case BoardTypes.DEACTIVATE_GRAPHIC :
+            return desactiveGraphicSelectd(state);
         default:
             return {...state}
     }
@@ -122,5 +127,19 @@ function updateGraphic(graphic:Graphic,state:BoardState){
             return element;
         })]
     }
+}
+
+function desactiveGraphicSelectd(state:BoardState){
+    return {
+        ...state,
+        graphicActive:null,
+        graphics:deselectsGraphics(state) 
+    }
+}
+function deselectsGraphics(state:BoardState){
+    return state.graphics.map((element)=>{
+        element.selected = false;
+        return element;
+    })
 }
 

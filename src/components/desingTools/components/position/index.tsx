@@ -1,7 +1,9 @@
 import React from 'react';
 
 import {Container} from './styles';
-import {Graphic} from '../../store/ducks/board/types';
+
+import { IDesingTools } from './../../index';
+
 
 import { 
     AiOutlineAlignCenter,
@@ -14,11 +16,7 @@ import {
 } from "react-icons/ai";
 
 
-interface Props{
-    graphicActive:Graphic,
-    updateStateGraphic:(graphic:Graphic)=>void;
-}
-const HandlerGraphicsPosition:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
+const PositionTools:React.FC<IDesingTools> = ({graphicActive,updateStateGraphic})=>{
 
     function handlerJustifyContent(justify:string){
         return updateStateGraphic({
@@ -52,4 +50,4 @@ const HandlerGraphicsPosition:React.FC<Props> = ({graphicActive,updateStateGraph
         }
     </Container>
 }
-export default HandlerGraphicsPosition;
+export default PositionTools;

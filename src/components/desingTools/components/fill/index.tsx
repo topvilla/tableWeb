@@ -2,15 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 
 import {Container} from './styles';
-import { Graphic } from '../../store/ducks/board/types';
-
-interface Props {
-    graphicActive:Graphic,
-    updateStateGraphic:(graphic:Graphic)=>void;
-}
+import { IDesingToolsWithBoard } from '../..';
 
 
-const Fill:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
+const FillTools:React.FC<IDesingToolsWithBoard> = ({graphicActive,updateStateGraphic,board})=>{
 
     const [color,setColor] = useState<string>('');
 
@@ -18,14 +13,16 @@ const Fill:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
         if(graphicActive){
             if(graphicActive.backGroundColor !== 'transparent' && graphicActive.backGroundColor !== 'none')
                 setColor(graphicActive.backGroundColor);
-            else setColor('');
-        }
-    },[graphicActive])
+            else setColor(board.backGroundColor);
+        }else setColor(board.backGroundColor);
+        
+    },[graphicActive,board]);
+
 
     function handlerChangeColor(event:React.ChangeEvent<HTMLInputElement>){
         const color = event.target.value;
         setColor(color);
-        updateBackGroundColorGraphicActive(color);
+        if(graphicActive)updateBackGroundColorGraphicActive(color);
     }
     function handlerChangeColorText(event:React.ChangeEvent<HTMLInputElement>){
         const color = event.target.value;
@@ -33,10 +30,11 @@ const Fill:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
     }
     function handlerKeyPressEnter(event:React.KeyboardEvent<HTMLInputElement>){
         const {key} = event;
-        if(key === 'Enter')
-            if(color[0] === '#')updateBackGroundColorGraphicActive(color);
-            else updateBackGroundColorGraphicActive(`#${color}`);
-       
+        if(key === 'Enter')parseColorText();
+    }
+    function parseColorText(){
+        if(color[0] === '#')updateBackGroundColorGraphicActive(color);
+        else updateBackGroundColorGraphicActive(`#${color}`);
     }
     function updateBackGroundColorGraphicActive(color:string){
         updateStateGraphic({
@@ -46,8 +44,11 @@ const Fill:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
     }
 
     function renderHandlerFillGraphic(){
-        if(graphicActive){
+        if(graphicActive || board){
             return <div>
+                <div>
+                    <h3>Cor de fundo</h3>
+                </div>
                 <input type = "color" value = {color} onChange = {handlerChangeColor}/>
                 <input type = "text" value = {color} 
                     onChange = {handlerChangeColorText}
@@ -61,4 +62,4 @@ const Fill:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
         }
     </Container>
 }
-export default Fill;
+export default FillTools;

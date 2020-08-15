@@ -10,7 +10,6 @@ interface Props {
     index:number,
     hiddenGraphic:(graphic:Graphic)=>void;
     selectGraphic:(graphic:Graphic)=>void;
-
 }
 
 const Layer:React.FC<Props> = ({graphic,index,hiddenGraphic,selectGraphic})=>{

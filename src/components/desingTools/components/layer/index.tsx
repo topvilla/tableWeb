@@ -2,15 +2,12 @@ import React  from 'react';
 
 
 import {Container , SubContainer , LayerInfo,Title ,LayerName} from './styles';
-import { Graphic } from '../../store/ducks/board/types';
-import HiddenButton from '../hiddenButton';
+import { Graphic } from '../../../../store/ducks/board/types';
+import HiddenButton from '../../../hiddenButton';
+import { IDesingTools } from './../../index';
 
-interface Props{
-    graphicActive:Graphic,
-    updateStateGraphic:(graphic:Graphic)=>void;
-}
 
-const HandlerLayer:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
+const LayerTools:React.FC<IDesingTools> = ({graphicActive,updateStateGraphic})=>{
  
     function hiddenLayer(){
         updateStateGraphic({
@@ -43,4 +40,4 @@ const HandlerLayer:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
     </Container>
 }
 
-export default HandlerLayer;
+export default LayerTools;

@@ -2,16 +2,12 @@ import React,{useState,useEffect} from 'react';
 
 
 import {Container,Input,Label} from './styles';
-import {Graphic} from '../../store/ducks/board/types';
 
 import { AiOutlineColumnWidth , AiOutlineColumnHeight} from "react-icons/ai";
+import { IDesingTools } from './../../index';
 
 
-interface Props{
-    graphicActive:Graphic,
-    updateStateGraphic:(graphic:Graphic)=>void;
-}
-const HandlerSizeElement:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
+const SizeTools:React.FC<IDesingTools> = ({graphicActive,updateStateGraphic})=>{
 
     const [heigth,setHeight] = useState<string>('0');
     const [width,setWidth] = useState<string>('0');
@@ -73,4 +69,4 @@ const HandlerSizeElement:React.FC<Props> = ({graphicActive,updateStateGraphic})=
         }
     </Container>
 }
-export default HandlerSizeElement;
+export default SizeTools;

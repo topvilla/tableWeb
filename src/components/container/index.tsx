@@ -17,8 +17,10 @@ const BoardContainer:React.FC<Props> = ({container})=>{
             justifyContent = {container.justifyContent}
             alignItems = {container.alignItems}
             backGroundColor = {container.backGroundColor}
-            onClick = {()=>{
+            onClick = {(event)=>{
                 dispatch(selectGraphicAction(container));
+                event.preventDefault();
+                event.stopPropagation();
             }}
         >
         <div
