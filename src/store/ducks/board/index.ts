@@ -7,16 +7,19 @@ const INITIAL_STATE:BoardState = {
         {
             id:uuidv4().toString(),
             heigth:100,
+            name:'Cabeçalho',
             width:100,
             visible:true,
             selected:false,
             type:"container",
             justifyContent:"flex-start",
             alignItems:"flex-start",
+            backGroundColor:"transparent",
             graphisc:[],
         },
         {
             id:uuidv4().toString(),
+            name:'Corpo',
             heigth:500,
             width:100,
             visible:true,
@@ -24,10 +27,12 @@ const INITIAL_STATE:BoardState = {
             type:"container",
             justifyContent:"flex-start",
             alignItems:"flex-start",
+            backGroundColor:"transparent",
             graphisc:[],
         },
         {
             id:uuidv4().toString(),
+            name:'Rodapé',
             heigth:100,
             width:100,
             visible:true,
@@ -35,6 +40,7 @@ const INITIAL_STATE:BoardState = {
             type:"container",
             justifyContent:"flex-start",
             alignItems:"flex-start",
+            backGroundColor:"none",
             graphisc:[],
         },
 
@@ -50,10 +56,14 @@ export function boardReducer(
 
         case BoardTypes.UPDATE_GRAPHIC_SELECTED :
             return updateGraphicSelected(action.graphic,state);
+        case BoardTypes.UPDATE_GRAPHIC :
+            return updateGraphic(action.graphic,state);
         case BoardTypes.SELECT_GRAPHIC :
             return selectGraphic(action.graphic,state);
         case BoardTypes.ADD_GRAPHIC :
             return addGraphicInGraphics(action.graphic,state);
+        case BoardTypes.HIDDEN_GRAPHIC :
+            return hiddenGraphic(action.graphic,state);
         default:
             return {...state}
     }
@@ -93,3 +103,24 @@ function addGraphicInGraphics(graphic:Graphic,state:BoardState){
         graphics:[...state.graphics,graphic]
     }
 }
+
+function hiddenGraphic(graphic:Graphic,state:BoardState){
+    return {
+        ...state,
+        graphics:[...state.graphics.map((element)=>{
+            if(element.id === graphic.id)element.visible = !element.visible;
+            return element;
+        })]
+    }
+}
+
+function updateGraphic(graphic:Graphic,state:BoardState){
+    return {
+        ...state,
+        graphics:[...state.graphics.map((element)=>{
+            if(element.id === graphic.id)return graphic;
+            return element;
+        })]
+    }
+}
+

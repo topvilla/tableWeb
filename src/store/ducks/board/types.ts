@@ -4,6 +4,8 @@ export enum BoardTypes{
     ADD_GRAPHIC = "board/ADD_GRAPHIC",
     SELECT_GRAPHIC = "board/SELECT_GRAPHIC ",
     UPDATE_GRAPHIC_SELECTED = "board/UPDATE_GRAPHIC_SELECTED ",
+    UPDATE_GRAPHIC = "board/UPDATE_GRAPHIC ",
+    HIDDEN_GRAPHIC = "board/HIDDEN_GRAPHIC "
 }
 
 
@@ -18,23 +20,34 @@ interface selectGraphicAction {
     graphic:IGraphic | IContainer
 }
 
+interface hiddenGraphic{
+    type:string,
+    graphic:IGraphic | IContainer
+}
 
 interface updateGraphicSelected{
     type:string,
     graphic:IGraphic | IContainer
 }
+interface updateGraphic{
+    type:string,
+    graphic:IGraphic | IContainer
+}
 
-export type BoardActions = addGraphicAction | selectGraphicAction | updateGraphicSelected;
+export type BoardActions = addGraphicAction | selectGraphicAction 
+| updateGraphicSelected | hiddenGraphic | updateGraphic;
 
 // states
 export interface IGraphic {
     id:string,
+    name:string,
     width:number,
     heigth:number;
     visible:boolean,
     selected:boolean;
     justifyContent:string,
     alignItems:string;
+    backGroundColor:string;
     type:string;
 }
 

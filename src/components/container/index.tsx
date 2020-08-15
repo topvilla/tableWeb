@@ -16,13 +16,14 @@ const BoardContainer:React.FC<Props> = ({container})=>{
             visible = {container.visible}
             justifyContent = {container.justifyContent}
             alignItems = {container.alignItems}
+            backGroundColor = {container.backGroundColor}
             onClick = {()=>{
                 dispatch(selectGraphicAction(container));
             }}
         >
         <div
             style = {{
-                backgroundColor:"red",
+                backgroundColor:"gray",
                 width:"100px",
                 height:"50px"
             }}
@@ -31,7 +32,7 @@ const BoardContainer:React.FC<Props> = ({container})=>{
         </div>
         <div
             style = {{
-                backgroundColor:"red",
+                backgroundColor:"gray",
                 width:"100px",
                 height:"50px"
             }}
@@ -40,7 +41,7 @@ const BoardContainer:React.FC<Props> = ({container})=>{
         </div>
         <div
             style = {{
-                backgroundColor:"red",
+                backgroundColor:"gray",
                 width:"100px",
                 height:"50px"
             }}

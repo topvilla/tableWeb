@@ -1,8 +1,10 @@
 import React,{useState,useEffect} from 'react';
 
 
-import {Container} from './styles';
+import {Container,Input,Label} from './styles';
 import {Graphic} from '../../store/ducks/board/types';
+
+import { AiOutlineColumnWidth , AiOutlineColumnHeight} from "react-icons/ai";
 
 
 interface Props{
@@ -47,20 +49,20 @@ const HandlerSizeElement:React.FC<Props> = ({graphicActive,updateStateGraphic})=
     function renderSizeChangeElement(){
         if(graphicActive){
             return <div>
-            <label>
-                <input type = "number" value = {width}
+            <Label>
+                <AiOutlineColumnWidth size = {20}/>
+                <Input type = "number" value = {width}
                  onChange = {handlerChangeSizeWidth}
                  onKeyPress = {handlerKeyPressEnter}
                 />
-                %Largura
-            </label>
-            <label>
-                <input type = "number" value = {heigth}
+            </Label>
+            <Label>
+                <AiOutlineColumnHeight size = {20}/>
+                <Input type = "number" value = {heigth}
                     onChange = {handlerChangeSizeHeight}
                     onKeyPress = {handlerKeyPressEnter}
                 />
-                Altura
-            </label>
+            </Label>
         </div>
         }
     }

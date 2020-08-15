@@ -21,7 +21,7 @@ export default createGlobalStyle`
     body {
         font: 100% 'Roboto',sans-serif;
         -webkit-font-smmothing: antialiased !important;
-        background-color:lightgray;
+        background-color:#E5E5E5;
         overflow:hidden;
     }
 

@@ -1,45 +1,39 @@
 import React from 'react';
 
-import {Container } from './styles';
+import {Container ,Title} from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/ducks/rootReducer';
-import { updateGraphicSelected } from '../../store/ducks/board/actions';
+import { updateGraphicSelected} from '../../store/ducks/board/actions';
 import { Graphic } from '../../store/ducks/board/types';
-
-import HandlerSizeElement from '../handlerSizeElement';
-import HandlerGraphicsPosition from './../handlerGraphicsPosition/index';
-import HandlerLayer from '../handlerLayer';
+import ToolsGraphiStyle from '../toolsGraphicStyle/indext';
 
 
 
 const ConfigMenu = ()=>{
 
-
     const state = useSelector((state:RootState)=>state.board);
     const graphicActive = (state.graphicActive as Graphic);
     const dispatch = useDispatch();
 
-
     function updateStateActiveGraphic(graphic:Graphic){
         dispatch(updateGraphicSelected(graphic));
     }
-
-    return <Container>
-        
+    function render(){
     
-        <HandlerGraphicsPosition
-          graphicActive = {graphicActive} 
-          updateStateGraphic = {updateStateActiveGraphic}
-        />
-        <HandlerSizeElement 
+        return  <ToolsGraphiStyle 
             graphicActive = {graphicActive} 
             updateStateGraphic = {updateStateActiveGraphic}
         />
-        <HandlerLayer
-             graphicActive = {graphicActive} 
-             updateStateGraphic = {updateStateActiveGraphic}
-        />
-
+              
+    }
+  
+    return <Container>
+        <Title>
+             <h1>Desing</h1> 
+        </Title>
+       {
+           render()
+       }
     </Container>
 }
 export default ConfigMenu;

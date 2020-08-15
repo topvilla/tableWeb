@@ -1,8 +1,9 @@
-import React , {useState} from 'react';
+import React  from 'react';
 
 
-import {Container} from './styles';
+import {Container , SubContainer , LayerInfo,Title ,LayerName} from './styles';
 import { Graphic } from '../../store/ducks/board/types';
+import HiddenButton from '../hiddenButton';
 
 interface Props{
     graphicActive:Graphic,
@@ -10,38 +11,31 @@ interface Props{
 }
 
 const HandlerLayer:React.FC<Props> = ({graphicActive,updateStateGraphic})=>{
-    const [opacity,setOpacity] = useState<string>('100');
-
-    function handlerChangeOpacityValue(event:React.ChangeEvent<HTMLInputElement>){
-        const {target} = event;
-        setOpacity(target.value);
-    }
-    function handlerKeyPressEnter(event:React.KeyboardEvent<HTMLInputElement>){
-        const {key} = event;
-        if(key === 'Enter')
-        parserSizesUpdateOpacityStateActiveGraphic();
-    }
-    function parserSizesUpdateOpacityStateActiveGraphic(){
-        // const opacityValue = parseInt(opacity);
-        updateStateGraphic({
-            ...graphicActive!,
-        });
-    }
+ 
     function hiddenLayer(){
         updateStateGraphic({
             ...graphicActive!,
             visible:!graphicActive.visible
         });
     }
+    function renderLayeName(graphic:Graphic){
+        if(graphic.name.length === 0)
+            return `${graphic.type}`;
+        return `${graphic.name}`;
+    }
 
     function renderChangeLayer(){
         if(graphicActive){
-            return <div>
-              
-                <button onClick = {()=>hiddenLayer()}>hidden</button>
-            </div>
+            return <SubContainer>
+                <Title>Camada</Title>
+                <LayerInfo>
+                    <LayerName>{renderLayeName(graphicActive)}</LayerName>
+                    <HiddenButton hidden = {hiddenLayer} graphicActive = {graphicActive} />
+                </LayerInfo>
+            </SubContainer>
         }
     }
+    
     return <Container>
         {
             renderChangeLayer()

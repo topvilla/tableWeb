@@ -3,6 +3,16 @@ import React from 'react';
 import {Container} from './styles';
 import {Graphic} from '../../store/ducks/board/types';
 
+import { 
+    AiOutlineAlignCenter,
+    AiOutlineAlignLeft,
+    AiOutlineAlignRight,
+    AiOutlineVerticalAlignTop,
+    AiOutlineVerticalAlignMiddle,
+    AiOutlineVerticalAlignBottom
+
+} from "react-icons/ai";
+
 
 interface Props{
     graphicActive:Graphic,
@@ -26,12 +36,12 @@ const HandlerGraphicsPosition:React.FC<Props> = ({graphicActive,updateStateGraph
     function renderPositionElementChange(){
         if(graphicActive){
             return <div>
-               <button onClick = {(event)=>handlerJustifyContent("flex-start")}>let H</button>
-               <button onClick = {(event)=>handlerJustifyContent("center")}>center H</button>
-               <button onClick = {(event)=>handlerJustifyContent("flex-end")}>right H</button>
-               <button onClick = {(event)=>handlerAlignItemnsContent("flex-start")}>let V</button>
-               <button onClick = {(event)=>handlerAlignItemnsContent("center")}>center V</button>
-               <button onClick = {(event)=>handlerAlignItemnsContent("flex-end")}>right V</button>
+               <button onClick = {(event)=>handlerJustifyContent("flex-start")}><AiOutlineAlignLeft/></button>
+               <button onClick = {(event)=>handlerJustifyContent("center")}><AiOutlineAlignCenter/></button>
+               <button onClick = {(event)=>handlerJustifyContent("flex-end")}><AiOutlineAlignRight/></button>
+               <button onClick = {(event)=>handlerAlignItemnsContent("flex-start")}><AiOutlineVerticalAlignTop/></button>
+               <button onClick = {(event)=>handlerAlignItemnsContent("center")}><AiOutlineVerticalAlignMiddle/></button>
+               <button onClick = {(event)=>handlerAlignItemnsContent("flex-end")}><AiOutlineVerticalAlignBottom/></button>
         </div>
         }
     }

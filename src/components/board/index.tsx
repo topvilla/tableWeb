@@ -6,7 +6,7 @@ import ToolsBar from '../tools';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/ducks/rootReducer';
 import BoardContainer from '../container';
-import { IContainer, Graphic} from '../../store/ducks/board/types';
+import { Graphic} from '../../store/ducks/board/types';
 
 
 
@@ -16,15 +16,16 @@ export default function Board(){
     const graphics:Array<Graphic> = state.graphics;
 
     return <Container>
-            {/* <ToolsBar/> */}
+            <ToolsBar/>
                 <Layouts>
                     {
+                      // eslint-disable-next-line
                        graphics.map((graphic:Graphic)=>{
                            if(graphic.visible){
-                            return <BoardContainer 
-                            key = {graphic.id}
-                            container = {graphic}
-                            /> 
+                                return <BoardContainer 
+                                key = {graphic.id}
+                                container = {graphic}
+                                /> 
                            }
                        })
                     }

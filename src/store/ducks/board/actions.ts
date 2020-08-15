@@ -9,7 +9,6 @@ export const addGraphicAction = (graphic:IGraphic | IContainer)=>{
     }
 }
 
-
 export const selectGraphicAction = (graphic:IGraphic | IContainer)=>{
     return {
         type:BoardTypes.SELECT_GRAPHIC,
@@ -17,11 +16,23 @@ export const selectGraphicAction = (graphic:IGraphic | IContainer)=>{
     }
 }
 
-
-
 export const updateGraphicSelected = (graphic:IGraphic | IContainer)=>{
     return {
         type:BoardTypes.UPDATE_GRAPHIC_SELECTED,
+        graphic
+    }
+}
+
+export const updateGraphicAction = (graphic:IGraphic | IContainer)=>{
+    return {
+        type:BoardTypes.UPDATE_GRAPHIC,
+        graphic
+    }
+}
+
+export const hiddenGraphicAction = (graphic:IGraphic | IContainer)=>{
+    return {
+        type:BoardTypes.HIDDEN_GRAPHIC,
         graphic
     }
 }
