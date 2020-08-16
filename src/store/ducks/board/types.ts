@@ -15,37 +15,37 @@ export enum BoardTypes{
 //actions
 interface addGraphicAction {
     type:string,
-    graphic:IGraphic | IContainer
+    graphic:Graphic
 }
 
 interface selectGraphicAction {
     type:string,
-    graphic:IGraphic | IContainer
+    graphic:IGraphic
 }
 
 interface hiddenGraphic{
     type:string,
-    graphic:IGraphic | IContainer
+    graphic:Graphic
 }
 
 interface updateGraphicSelected{
     type:string,
-    graphic:IGraphic | IContainer
+    graphic:Graphic
 }
 interface updateGraphic{
     type:string,
-    graphic:IGraphic | IContainer
+    graphic:Graphic
 }
 
 interface deactivateGraphicAction{
     type:string,
-    graphic?:IGraphic | IContainer 
+    graphic?:Graphic 
 }
 
 export interface updateBoardStateActionType {
     type:string,
     board:IBoard,
-    graphic?:IGraphic | IContainer 
+    graphic?:Graphic 
 }
 
 export type BoardActions = addGraphicAction | selectGraphicAction 
@@ -63,18 +63,19 @@ export interface IGraphic {
     alignItems:string;
     backGroundColor:string;
     type:string;
+    childrens:Array<IGraphic>
 }
 
-export interface IContainer extends IGraphic{
-    graphisc:Array<IGraphic | IContainer>
-}
+// export interface IContainer extends IGraphic{
+//     childrens:Array<IGraphic | IContainer>
+// }
 
 export interface IBoard{
     backGroundColor:string;
     type:string;
 } 
 
-export type Graphic = IGraphic | IContainer;
+export type Graphic = IGraphic;
 
 export interface BoardState {
 

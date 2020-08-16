@@ -10,16 +10,16 @@ const INITIAL_STATE:BoardState = {
     graphics:[
         {
             id:uuidv4().toString(),
-            name:'Cabeçalho',
+            name:'',
             heigth:700,
             width:100,
             visible:true,
             selected:false,
-            type:"container",
+            type:"container-princial",
             justifyContent:"flex-start",
             alignItems:"flex-start",
             backGroundColor:"transparent",
-            graphisc:[
+            childrens:[
                 {
                     id:uuidv4().toString(),
                     name:'Corpo',
@@ -31,17 +31,15 @@ const INITIAL_STATE:BoardState = {
                     justifyContent:"flex-start",
                     alignItems:"flex-start",
                     backGroundColor:"transparent",
-                    graphisc:[],
+                    childrens:[],
                 },
             ],
         },
     ]
 }
 
-export function boardReducer(
-    state = INITIAL_STATE,
-    action:BoardActions
-){
+export function boardReducer(state = INITIAL_STATE,action:BoardActions){
+
     const {graphic} = action; 
     switch (action.type) {
         case BoardTypes.UPDATE_GRAPHIC_SELECTED :
@@ -142,3 +140,55 @@ function updateBoardState(board:IBoard,state:BoardState){
         }
     }
 }
+
+
+
+// function findGraphicSelected(graphic:Graphic,filter:(children:Graphic)=>boolean){
+//     if(filter(graphic))return graphic;
+//     if(hasChildren(graphic)){
+//        return graphic.childrens.find(children=>{
+//             return findGraphicSelected(children,filter);
+//         });
+//      } 
+// }
+// function updateGraphicsN(graphics:Array<Graphic>,graphic:IGraphic | IContainer){
+//    return graphics.map(element=>{
+//         if(element.id === graphic.id)return graphic;
+//         if(hasChildren(element)){
+//             return {
+//             ...element,
+//             graphisc:[
+//                ... update(element.graphisc,graphic)
+//             ]
+//           } 
+//         }
+//         return element;
+          
+//    })
+// }
+// function add(graphics:Array<IGraphic | IContainer>,where:number,graphic:IGraphic | IContainer){
+//    return graphics.map(element=>{
+//           if(element.id === where){
+//             return {
+//               ...element,
+//                graphisc:[
+//                  ...element.graphisc,graphic
+//                ]
+//             }
+//           }
+//           if(hasChildren(element)){
+                
+//             return {
+//               ...element,
+//                graphisc:[
+//                   ...add(element.graphisc,where,graphic)
+//                ]
+//             }
+//           }
+//           return element;
+          
+//    })
+// }
+// function hasChildren(conteiner:Graphic):boolean{
+//     return conteiner.childrens && conteiner.childrens.length > 0
+// }

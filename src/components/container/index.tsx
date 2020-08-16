@@ -4,6 +4,7 @@ import {Container} from './styles';
 import {Graphic} from '../../store/ducks/board/types';
 import { useDispatch } from 'react-redux';
 import { selectGraphicAction } from '../../store/ducks/board/actions';
+import { componentFactory } from '../../factory/componentFactory';
 
 interface Props{
     container:Graphic
@@ -23,7 +24,7 @@ const BoardContainer:React.FC<Props> = ({container})=>{
                 event.stopPropagation();
             }}
         >
-      
+
     </Container>
 }
 export default BoardContainer;

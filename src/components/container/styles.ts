@@ -15,6 +15,7 @@ export const Container = styled.div<Props>`
     border:${props=>props.selected?'solid 1.5px #5C9DFF':'dashed 1px dimgray'};
     visibility:${props=>props.visible?'visible':'hidden'};
     display:flex;
+    width:100%;
     justify-content:${props=>props.justifyContent};
     align-items:${props=>props.alignItems};
     background-color:${props=>props.backGroundColor};

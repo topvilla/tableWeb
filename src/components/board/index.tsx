@@ -26,7 +26,11 @@ export default function Board(){
                 dispatch(deactivateGraphicAction());
             }
         }
-    },[dispatch])
+    },[dispatch]);
+
+    function deactiveGraphic(){
+        dispatch(deactivateGraphicAction());
+    }
 
     return <Container>
             <Menu>
@@ -36,7 +40,7 @@ export default function Board(){
                 <Layouts
                     backGroundColor = {board.backGroundColor}
                     onClick = {(event)=>{
-                        dispatch(deactivateGraphicAction());
+                        deactiveGraphic();
                         event.preventDefault();
                     }}
                 >

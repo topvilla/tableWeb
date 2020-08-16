@@ -6,6 +6,7 @@ import { FiLayers } from "react-icons/fi";
 import { GoTextSize } from "react-icons/go";
 import { IoIosImages } from "react-icons/io";
 import { MdVideoLibrary , MdViewList} from "react-icons/md";
+import { AiOutlineGroup } from "react-icons/ai";
 
 
 const GraphicTools = ()=>{
@@ -13,7 +14,7 @@ const GraphicTools = ()=>{
     return <Container>
         <Tools>
                 <Tool>
-                    <GoTextSize/>
+                    <AiOutlineGroup/>
                 </Tool>
                 <Tool>
                     <IoIosImages/>

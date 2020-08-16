@@ -1,36 +1,36 @@
 
-import { BoardTypes, IGraphic, IContainer, IBoard } from './types';
+import { BoardTypes, Graphic, IBoard } from './types';
 
 
-export const addGraphicAction = (graphic:IGraphic | IContainer)=>{
+export const addGraphicAction = (graphic:Graphic)=>{
     return {
         type:BoardTypes.ADD_GRAPHIC,
         graphic
     }
 }
 
-export const selectGraphicAction = (graphic:IGraphic | IContainer)=>{
+export const selectGraphicAction = (graphic:Graphic)=>{
     return {
         type:BoardTypes.SELECT_GRAPHIC,
         graphic
     }
 }
 
-export const updateGraphicSelectedAction = (graphic:IGraphic | IContainer)=>{
+export const updateGraphicSelectedAction = (graphic:Graphic)=>{
     return {
         type:BoardTypes.UPDATE_GRAPHIC_SELECTED,
         graphic
     }
 }
 
-export const updateGraphicAction = (graphic:IGraphic | IContainer)=>{
+export const updateGraphicAction = (graphic:Graphic)=>{
     return {
         type:BoardTypes.UPDATE_GRAPHIC,
         graphic
     }
 }
 
-export const hiddenGraphicAction = (graphic:IGraphic | IContainer)=>{
+export const hiddenGraphicAction = (graphic:Graphic)=>{
     return {
         type:BoardTypes.HIDDEN_GRAPHIC,
         graphic
