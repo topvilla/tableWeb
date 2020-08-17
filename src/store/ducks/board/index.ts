@@ -20,19 +20,46 @@ const INITIAL_STATE:BoardState = {
             alignItems:"flex-start",
             backGroundColor:"transparent",
             childrens:[
-                {
-                    id:uuidv4().toString(),
-                    name:'Corpo',
-                    heigth:500,
-                    width:100,
-                    visible:true,
-                    selected:false,
-                    type:"container",
-                    justifyContent:"flex-start",
-                    alignItems:"flex-start",
-                    backGroundColor:"transparent",
-                    childrens:[],
-                },
+                // {
+                //     id:uuidv4().toString(),
+                //     name:'Corpo',
+                //     heigth:700,
+                //     width:50,
+                //     visible:true,
+                //     selected:false,
+                //     type:"container",
+                //     justifyContent:"flex-start",
+                //     alignItems:"flex-start",
+                //     backGroundColor:"transparent",
+                //     childrens:[
+                //         {
+                //             id:uuidv4().toString(),
+                //             name:'Corpo',
+                //             heigth:200,
+                //             width:100,
+                //             visible:true,
+                //             selected:false,
+                //             type:"container",
+                //             justifyContent:"flex-start",
+                //             alignItems:"flex-start",
+                //             backGroundColor:"transparent",
+                //             childrens:[],
+                //         },
+                //     ],
+                // },
+                // {
+                //     id:uuidv4().toString(),
+                //     name:'Corpo',
+                //     heigth:700,
+                //     width:50,
+                //     visible:true,
+                //     selected:false,
+                //     type:"container",
+                //     justifyContent:"flex-start",
+                //     alignItems:"flex-start",
+                //     backGroundColor:"transparent",
+                //     childrens:[],
+                // },
             ],
         },
     ]
@@ -66,29 +93,44 @@ function updateGraphicSelected(graphic:Graphic,state:BoardState){
     return {
         ...state,
         graphicActive:graphic,
-        graphics:[...updateGraphics(graphic,state)]
+        graphics:[...updateGraphics(state.graphics,graphic)]
     }
 }
-function updateGraphics(graphic:Graphic,state:BoardState){
-   return state.graphics.map((element)=>{
-        if(element.id === graphic.id) return graphic
-        else return element;
+function updateGraphics(graphics:Array<Graphic>,graphic:Graphic):Array<Graphic>{
+    return graphics.map(element=>{
+         if(element.id === graphic.id)return graphic;
+         if(hasChildren(element)){
+             return {
+             ...element,
+             childrens:[
+                ... updateGraphics(element.childrens,graphic)
+             ]
+           } 
+         }
+         return element;  
     })
-}
+ }
 function selectGraphic(graphic:Graphic,state:BoardState){
     return {
         ...state,
         graphicActive:graphic,
-        graphics:selectGraphicInGraphics(graphic,state)
+        graphics:[
+            ...selectGraphicInGraphics(state.graphics,graphic)
+        ]
         
     }
 }
-function selectGraphicInGraphics(graphic:Graphic,state:BoardState){
-    return state.graphics.map((element)=>{
-        if(element.id === graphic.id)element.selected = true;
-        else element.selected = false;
-        return element;
-    })
+function selectGraphicInGraphics(graphics:Array<Graphic>,graphic:Graphic):Array<Graphic>{
+    return graphics.map((element)=>{
+            if(element.id === graphic.id)element.selected = true;
+            else element.selected = false;
+            if(hasChildren(element)){
+                element.childrens = [
+                    ...selectGraphicInGraphics(element.childrens,graphic)
+                ]
+            }
+            return element;
+    });
 }
 function addGraphicInGraphics(graphic:Graphic,state:BoardState){
     return {
@@ -100,37 +142,42 @@ function addGraphicInGraphics(graphic:Graphic,state:BoardState){
 function hiddenGraphic(graphic:Graphic,state:BoardState){
     return {
         ...state,
-        graphics:[...state.graphics.map((element)=>{
-            if(element.id === graphic.id)element.visible = !element.visible;
-            return element;
-        })]
+        graphics:[...hiddenGraphics(state.graphics,graphic)]
     }
 }
+function hiddenGraphics(graphics:Array<Graphic>,graphic:Graphic):Array<Graphic>{
 
-function updateGraphic(graphic:Graphic,state:BoardState){
-    return {
-        ...state,
-        graphics:[...state.graphics.map((element)=>{
-            if(element.id === graphic.id)return graphic;
-            return element;
-        })]
-    }
+    return graphics.map((element)=>{
+        if(element.id === graphic.id)element.visible = !element.visible;
+        else if(hasChildren(element)){
+            element.childrens = [
+                    ...hiddenGraphics(element.childrens,graphic)
+                ]
+            }
+        return element;
+    })
 }
 
 function desactiveGraphicSelectd(state:BoardState){
     return {
         ...state,
         graphicActive:null,
-        graphics:deselectsGraphics(state) 
+        graphics:[
+            ...deselectsGraphics(state.graphics)
+        ]
     }
 }
-function deselectsGraphics(state:BoardState){
-    return state.graphics.map((element)=>{
+function deselectsGraphics(graphics:Array<Graphic>){
+    return graphics.map((element)=>{
         element.selected = false;
+        if(hasChildren(element)){
+            element.childrens = [
+                ...deselectsGraphics(element.childrens)
+            ]
+        }
         return element;
     })
 }
-
 
 function updateBoardState(board:IBoard,state:BoardState){
     return {
@@ -142,6 +189,16 @@ function updateBoardState(board:IBoard,state:BoardState){
 }
 
 
+function updateGraphic(graphic:Graphic,state:BoardState){
+    return {
+        ...state,
+        graphics:[...state.graphics.map((element)=>{
+            if(element.id === graphic.id)return graphic;
+            return element;
+        })]
+    }
+}
+
 
 // function findGraphicSelected(graphic:Graphic,filter:(children:Graphic)=>boolean){
 //     if(filter(graphic))return graphic;
@@ -151,21 +208,7 @@ function updateBoardState(board:IBoard,state:BoardState){
 //         });
 //      } 
 // }
-// function updateGraphicsN(graphics:Array<Graphic>,graphic:IGraphic | IContainer){
-//    return graphics.map(element=>{
-//         if(element.id === graphic.id)return graphic;
-//         if(hasChildren(element)){
-//             return {
-//             ...element,
-//             graphisc:[
-//                ... update(element.graphisc,graphic)
-//             ]
-//           } 
-//         }
-//         return element;
-          
-//    })
-// }
+
 // function add(graphics:Array<IGraphic | IContainer>,where:number,graphic:IGraphic | IContainer){
 //    return graphics.map(element=>{
 //           if(element.id === where){
@@ -189,6 +232,6 @@ function updateBoardState(board:IBoard,state:BoardState){
           
 //    })
 // }
-// function hasChildren(conteiner:Graphic):boolean{
-//     return conteiner.childrens && conteiner.childrens.length > 0
-// }
+function hasChildren(conteiner:Graphic):boolean{
+    return conteiner.childrens && conteiner.childrens.length > 0
+}

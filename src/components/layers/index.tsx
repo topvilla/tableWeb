@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import {Container} from './styles';
+import {Container, List} from './styles';
 import { Graphic } from '../../store/ducks/board/types';
 import Layer from '../layer';
 
@@ -13,19 +13,19 @@ interface Props {
 
 const Layers:React.FC<Props> = ({graphics,hiddenGraphic,selectGraphic})=>{
 
-    return <Container>
-        <ul>
-            {
-                graphics.map((graphic,index)=>{
-                    return <Layer 
-                        graphic = {graphic} 
-                        index = {index}
-                        hiddenGraphic = {hiddenGraphic}
-                        selectGraphic = {selectGraphic}
-                    />
-                })
-            }
-        </ul>
-    </Container>
+    return  <List>
+        {
+            graphics.map((graphic,index)=>{
+                return <Layer 
+                    key = {graphic.id}
+                    graphic = {graphic} 
+                    index = {index}
+                    hiddenGraphic = {hiddenGraphic}
+                    selectGraphic = {selectGraphic}
+                />
+            })
+        }
+    </List>
+       
 }
 export default Layers;
